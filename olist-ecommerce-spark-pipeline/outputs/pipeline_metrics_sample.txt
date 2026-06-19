@@ -1,0 +1,46 @@
+OLIST ETL PIPELINE — SAMPLE RUN METRICS
+========================================
+Run ID       : 20240915_143022
+Environment  : Google Colab (single-node, 12GB RAM)
+PySpark      : 3.5.1
+Compression  : snappy
+
+STAGE TIMINGS
+-------------
+Extract (9 CSVs)            :  38.4s
+Transform — clean           :  52.1s
+Transform — integrate       :  41.7s
+Load — integrated Parquet   :  18.3s
+Load — aggregated Parquet   :   6.9s
+Total pipeline              : 157.4s (~2m 37s)
+
+ROW COUNTS
+----------
+Raw rows (all 9 tables)     : 1,649,911
+Integrated rows output      :   112,143
+Integrated columns          :        34
+Aggregated rows output      :    14,821
+
+DATA QUALITY SUMMARY
+--------------------
+Table              Raw Rows    Clean Rows  Removed   Retained%
+orders               99,441       98,666      775       99.2%
+order_items         112,650      111,698      952       99.2%
+customers            99,441       99,348       93       99.9%
+products             32,951       32,949        2      100.0%
+sellers               3,095        3,095        0      100.0%
+payments            103,886      103,783      103       99.9%
+reviews              99,224       98,371      853       99.1%
+geolocation       1,000,163      999,439      724       99.9%
+category_tr              71           71        0      100.0%
+
+PARQUET FILE SIZES (approximate)
+---------------------------------
+olist_integrated.parquet    :  14.2 MB
+olist_aggregated.parquet    :   1.1 MB
+orders_clean.parquet        :   8.7 MB
+order_items_clean.parquet   :   5.4 MB
+
+NOTE: Actual values will differ based on your Colab
+session, available RAM, and Spark version.
+Replace these figures with values from your own run.
